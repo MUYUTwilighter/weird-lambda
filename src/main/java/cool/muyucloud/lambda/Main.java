@@ -49,6 +49,13 @@ public class Main {
         /* The second set both take lambda WITH a param */
 //        bar(o -> new Test(o)); // Java cannot tell which method you are calling
         bar(o -> {});
+
+        /* Fix A */
+        bar((Function<Object, Object>) o -> new Test(o));
+        /* Fix B */
+        bar(o -> {  // Now Java knows which-is-which
+            new Test(o);
+        });
     }
 
     public static class Test {
